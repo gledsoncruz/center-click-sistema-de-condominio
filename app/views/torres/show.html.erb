@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Descricao:</strong>
+  <%= @torre.descricao %>
+</p>
+
+<p>
+  <strong>Sigla:</strong>
+  <%= @torre.sigla %>
+</p>
+
+<%= link_to 'Edit', edit_torre_path(@torre) %> |
+<%= link_to 'Back', torres_path %>

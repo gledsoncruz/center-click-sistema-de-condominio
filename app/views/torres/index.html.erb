@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Torres</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descricao</th>
+      <th>Sigla</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @torres.each do |torre| %>
+      <tr>
+        <td><%= torre.descricao %></td>
+        <td><%= torre.sigla %></td>
+        <td><%= link_to 'Show', torre %></td>
+        <td><%= link_to 'Edit', edit_torre_path(torre) %></td>
+        <td><%= link_to 'Destroy', torre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Torre', new_torre_path %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Descricao:</strong>
+  <%= @bloco.descricao %>
+</p>
+
+<p>
+  <strong>Sigla:</strong>
+  <%= @bloco.sigla %>
+</p>
+
+<%= link_to 'Edit', edit_bloco_path(@bloco) %> |
+<%= link_to 'Back', blocos_path %>

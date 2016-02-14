@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Piso:</strong>
+  <%= @unidade.piso %>
+</p>
+
+<p>
+  <strong>Numero:</strong>
+  <%= @unidade.numero %>
+</p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @unidade.tipo %>
+</p>
+
+<%= link_to 'Edit', edit_unidade_path(@unidade) %> |
+<%= link_to 'Back', unidades_path %>

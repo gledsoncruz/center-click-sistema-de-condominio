@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @condominio.nome %>
+</p>
+
+<p>
+  <strong>Cnpj:</strong>
+  <%= @condominio.cnpj %>
+</p>
+
+<%= link_to 'Edit', edit_condominio_path(@condominio) %> |
+<%= link_to 'Back', condominios_path %>

@@ -1,0 +1,102 @@
+# encoding: UTF-8
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# you'll amass, the slower it'll run and the greater likelihood for issues).
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema.define(version: 20160214174200) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "blocos", force: :cascade do |t|
+    t.integer  "condominio_id"
+    t.string   "descricao",     limit: 80, null: false
+    t.string   "sigla",         limit: 10, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "blocos", ["condominio_id"], name: "index_blocos_on_condominio_id", using: :btree
+
+  create_table "condominios", force: :cascade do |t|
+    t.string   "nome",       limit: 80, null: false
+    t.string   "cnpj",       limit: 15, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  create_table "enderecos", force: :cascade do |t|
+    t.integer  "pessoa_id"
+    t.string   "cep",         limit: 10
+    t.string   "logradouro",  limit: 100, null: false
+    t.string   "numero",      limit: 10,  null: false
+    t.string   "complemento", limit: 80
+    t.string   "cidade",      limit: 80,  null: false
+    t.string   "uf",          limit: 2,   null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "enderecos", ["pessoa_id"], name: "index_enderecos_on_pessoa_id", using: :btree
+
+  create_table "pessoas", force: :cascade do |t|
+    t.string   "cpf",          limit: 15
+    t.string   "cnpj",         limit: 15
+    t.string   "nome",         limit: 80, null: false
+    t.date     "dta_nasc",                null: false
+    t.string   "sexo",                    null: false
+    t.string   "email",        limit: 40
+    t.string   "cel",          limit: 15
+    t.string   "tel",          limit: 15
+    t.boolean  "proprietario"
+    t.string   "tipo",         limit: 20, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "torres", force: :cascade do |t|
+    t.integer  "bloco_id"
+    t.string   "descricao",  limit: 80, null: false
+    t.string   "sigla",      limit: 10, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "torres", ["bloco_id"], name: "index_torres_on_bloco_id", using: :btree
+
+  create_table "unidade_pessoas", id: false, force: :cascade do |t|
+    t.integer  "unidade_id", null: false
+    t.integer  "pessoa_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "unidade_pessoas", ["pessoa_id"], name: "index_unidade_pessoas_on_pessoa_id", using: :btree
+  add_index "unidade_pessoas", ["unidade_id"], name: "index_unidade_pessoas_on_unidade_id", using: :btree
+
+  create_table "unidades", force: :cascade do |t|
+    t.integer  "torre_id"
+    t.integer  "piso"
+    t.string   "numero",     limit: 5,  null: false
+    t.string   "tipo",       limit: 20, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "unidades", ["torre_id"], name: "index_unidades_on_torre_id", using: :btree
+
+  add_foreign_key "blocos", "condominios"
+  add_foreign_key "enderecos", "pessoas"
+  add_foreign_key "torres", "blocos"
+  add_foreign_key "unidade_pessoas", "pessoas"
+  add_foreign_key "unidade_pessoas", "unidades"
+  add_foreign_key "unidades", "torres"
+end
