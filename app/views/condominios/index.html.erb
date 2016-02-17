@@ -1,38 +1,61 @@
 <%- model_class = Condominio -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:nome) %></th>
-      <th><%= model_class.human_attribute_name(:cnpj) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @condominios.each do |condominio| %>
-      <tr>
-        <td><%= link_to condominio.id, condominio_path(condominio) %></td>
-        <td><%= condominio.nome %></td>
-        <td><%= condominio.cnpj %></td>
-        <td><%=l condominio.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_condominio_path(condominio), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      condominio_path(condominio),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h3>
+  </div>
+  <div class="panel-body">
+    <%= search_form_for @q do |f| %>
+      <%= f.label 'Consultar' %>
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="input-group">
+            <%= f.search_field :nome_cont, class: "form-control" %>
+            <spam class="input-group-btn">
+              <%= f.submit 'Buscar', class: "btn btn-default" %>
+            </spam>
+          </div>
+        </div>
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+          <%= link_to t('.new', :default => t("helpers.links.new")),
             new_condominio_path,
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn-primary pull-right' %>
+        </div>
+      </div>
+    <% end %>
+  </br>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><%= model_class.human_attribute_name(:id) %></th>
+          <th><%= model_class.human_attribute_name(:nome) %></th>
+          <th><%= model_class.human_attribute_name(:cnpj) %></th>
+          <th><%= model_class.human_attribute_name(:created_at) %></th>
+          <th colspan=3 style="text-align: center;"><%=t '.actions', :default => t("helpers.actions") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @condominios.each do |condominio| %>
+          <tr>
+            <td><%= condominio.id %></td>
+            <td><%= condominio.nome %></td>
+            <td><%= condominio.cnpj %></td>
+            <td><%=l condominio.created_at, :format => :short %></td>
+            <td style="text-align: center;">
+              <%= link_to '', condominio_path(condominio), :class => 'glyphicon glyphicon-search' %>
+            </td>
+            <td style="text-align: center;">
+              <%= link_to '', edit_condominio_path(condominio), :class => 'glyphicon glyphicon-pencil' %>
+            </td>
+            <td style="text-align: center;">
+              <%= link_to '', condominio_path(condominio),
+                          :method => :delete,
+                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                          :class => 'glyphicon glyphicon-trash' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @condominios, :previous_label => t("Anterior"), :next_label => t("Próximo"), renderer: BootstrapPagination::Rails %>
+  </div>
+</div>

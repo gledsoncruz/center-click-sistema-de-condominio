@@ -4,7 +4,9 @@ class CondominiosController < ApplicationController
   # GET /condominios
   # GET /condominios.json
   def index
-    @condominios = Condominio.all
+    #@condominios = Condominio.all
+    @q = Condominio.ransack(params[:q])
+    @condominios = @q.result.paginate(:per_page => 10, :page => params[:page])
   end
 
   # GET /condominios/1
