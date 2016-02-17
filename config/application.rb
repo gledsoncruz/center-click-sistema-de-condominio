@@ -21,6 +21,8 @@ module Centerclickcondominio
     # config.i18n.default_locale = :de
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :'pt-BR'
+    config.time_zone = 'Brasilia' # altera o time zone para a aplicação
+    config.active_record.default_timezone = :local # altera o ActiveRecord pra gravar os campos mágicos com o mesmo time zone da aplicação
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true

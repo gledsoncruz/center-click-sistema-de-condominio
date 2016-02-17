@@ -1,10 +1,14 @@
 
-<%= bootstrap_form_for(@condominio, layout: :horizontal) do |f| %>
+<%= bootstrap_form_for(@condominio, layout: :horizontal, label_col: "col-sm-0", control_col: "col-sm-8") do |f| %>
 <%= f.alert_message "Por favor, verifique os campos abaixo.", error_summary: false %>
-  <%= f.text_field :nome %>
-  <%= f.text_field :cnpj %>
+  <%= f.label :nome %>
+  <%= f.text_field :nome, skip_label: true %>
+  <%= f.label :cnpj %>
+  <%= f.text_field :cnpj, skip_label: true %>
   <%= f.form_group do %>
-    <%= f.submit 'Criar Condominio', class: "btn btn-primary"%>
+    <%= f.submit 'Submeter Formulário', class: "btn btn-primary"%>
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+              condominios_path, :class => 'btn btn-default'  %>
   <% end %>
 <% end %>
 
