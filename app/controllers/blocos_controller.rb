@@ -4,7 +4,8 @@ class BlocosController < ApplicationController
   # GET /blocos
   # GET /blocos.json
   def index
-    @blocos = Bloco.all
+    @q = Bloco.ransack(params[:q])
+    @blocos = @q.result.paginate(:per_page => 10, :page => params[:page])
   end
 
   # GET /blocos/1
@@ -15,6 +16,7 @@ class BlocosController < ApplicationController
   # GET /blocos/new
   def new
     @bloco = Bloco.new
+    @condominios = Condominio.all
   end
 
   # GET /blocos/1/edit
@@ -69,6 +71,6 @@ class BlocosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bloco_params
-      params.require(:bloco).permit(:descricao, :sigla)
+      params.require(:bloco).permit(:descricao, :sigla, :condominio_id)
     end
 end

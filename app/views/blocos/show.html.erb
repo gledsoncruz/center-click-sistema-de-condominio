@@ -1,14 +1,23 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Bloco -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Descricao:</strong>
-  <%= @bloco.descricao %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:condominio_id) %>:</strong></dt>
+  <dd><%= @bloco.condominio_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:descricao) %>:</strong></dt>
+  <dd><%= @bloco.descricao %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:sigla) %>:</strong></dt>
+  <dd><%= @bloco.sigla %></dd>
+</dl>
 
-<p>
-  <strong>Sigla:</strong>
-  <%= @bloco.sigla %>
-</p>
-
-<%= link_to 'Edit', edit_bloco_path(@bloco) %> |
-<%= link_to 'Back', blocos_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              blocos_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_bloco_path(@bloco), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              bloco_path(@bloco),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

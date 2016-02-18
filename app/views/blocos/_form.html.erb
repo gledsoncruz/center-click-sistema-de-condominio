@@ -1,25 +1,15 @@
-<%= form_for(@bloco) do |f| %>
-  <% if @bloco.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@bloco.errors.count, "error") %> prohibited this bloco from being saved:</h2>
-
-      <ul>
-      <% @bloco.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<%= bootstrap_form_for(@bloco, layout: :horizontal, label_col: "col-sm-0", control_col: "col-sm-8") do |f| %>
+<%= f.alert_message "Por favor, verifique os campos abaixo.", error_summary: false %>
+  <%= f.label 'Condomínio' %>
+  <%= f.collection_select :condominio_id, Condominio.all, :id, :nome, skip_label: true  %>
+  <%= f.label :descricao %>
+  <%= f.text_field :descricao, skip_label: true %>
+  <%= f.label :sigla %>
+  <%= f.text_field :sigla, skip_label: true %>
+  <%= f.form_group do %>
+    <%= f.submit 'Submeter Formulário', class: "btn btn-primary"%>
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+              blocos_path, :class => 'btn btn-default'  %>
   <% end %>
-
-  <div class="field">
-    <%= f.label :descricao %><br>
-    <%= f.text_field :descricao %>
-  </div>
-  <div class="field">
-    <%= f.label :sigla %><br>
-    <%= f.text_field :sigla %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
+
