@@ -10,7 +10,10 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <%= f.label :bloco_id %><br>
+    <%= f.collection_select :bloco_id, Bloco.all, :id, :descricao  %>
+  </div>
   <div class="field">
     <%= f.label :descricao %><br>
     <%= f.text_field :descricao %>

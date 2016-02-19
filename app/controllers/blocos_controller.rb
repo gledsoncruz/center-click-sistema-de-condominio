@@ -16,7 +16,6 @@ class BlocosController < ApplicationController
   # GET /blocos/new
   def new
     @bloco = Bloco.new
-    @condominios = Condominio.all
   end
 
   # GET /blocos/1/edit

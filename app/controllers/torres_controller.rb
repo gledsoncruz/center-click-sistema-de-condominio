@@ -4,7 +4,8 @@ class TorresController < ApplicationController
   # GET /torres
   # GET /torres.json
   def index
-    @torres = Torre.all
+    @q = Torre.ransack(params[:q])
+    @torres = @q.result.paginate(:per_page => 10, :page => params[:page])
   end
 
   # GET /torres/1
@@ -69,6 +70,6 @@ class TorresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def torre_params
-      params.require(:torre).permit(:descricao, :sigla)
+      params.require(:torre).permit(:descricao, :sigla, :bloco_id)
     end
 end
