@@ -27,8 +27,8 @@ gem 'twitter-bootstrap-rails'
 gem 'bootstrap_form'
 gem 'validates_cpf_cnpj'
 gem 'ransack'
-#gem 'will_paginate', github: 'jonatack/will_paginate'
 gem 'will_paginate-bootstrap'
+gem 'devise'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

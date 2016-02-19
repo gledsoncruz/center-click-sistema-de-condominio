@@ -27,20 +27,20 @@
       <thead>
         <tr>
           <th><%= model_class.human_attribute_name(:id) %></th>
-          <th><%= model_class.human_attribute_name(:condominio_id) %></th>
           <th><%= model_class.human_attribute_name(:descricao) %></th>
           <th><%= model_class.human_attribute_name(:sigla) %></th>
+          <th><%= model_class.human_attribute_name(:condominio_id) %></th>
           <th><%= model_class.human_attribute_name(:created_at) %></th>
-          <th colspan=3 style="text-align: center;"><%=t '.actions', :default => t("helpers.actions") %></th>
+          <th colspan=4 style="text-align: center;"><%=t '.actions', :default => t("helpers.actions") %></th>
         </tr>
       </thead>
       <tbody>
         <% @blocos.each do |bloco| %>
           <tr>
             <td><%= link_to bloco.id, bloco_path(bloco) %></td>
-            <td><%= bloco.condominio.nome %></td>
             <td><%= bloco.descricao %></td>
             <td><%= bloco.sigla %></td>
+            <td><%= bloco.condominio.nome %></td>
             <td><%=l bloco.created_at, :format => :short %></td>
             <td style="text-align: center;">
               <%= link_to '', bloco_path(bloco), :class => 'glyphicon glyphicon-search' %>
@@ -53,6 +53,9 @@
                           :method => :delete,
                           :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                           :class => 'glyphicon glyphicon-trash' %>
+            </td>
+            <td style="text-align: center;">
+              <%= link_to '', new_torre_path, :class => 'glyphicon glyphicon-plus' %>
             </td>
           </tr>
         <% end %>
